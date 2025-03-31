@@ -31,11 +31,12 @@ public class CarModel {
     @Column(name = "chassi", unique = true)
     String chassi;
 
-    @Column(name = "cliente")
-    ClienteModel cliente;
 
     @Column(name = "placa", unique = true)
     String placa;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_cliente_id")
+    private ClienteModel cliente;
 
 }

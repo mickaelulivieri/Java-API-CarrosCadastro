@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Data
 @RequiredArgsConstructor
 @Entity
@@ -13,19 +15,19 @@ public class ClienteModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "nome")
-    String nome;
+    private String nome;
 
     @Column(name = "idade")
-    int idade;
+    private int idade;
 
     @Column(name = "cpf")
-    String cpf;
+    private String cpf;
 
-    @Column(name = "carro")
-    CarModel car;
+    @OneToMany(mappedBy = "cliente")
+    private List<CarModel> carList;
 
 
 }
