@@ -20,5 +20,13 @@ public class CarService {
         return carRepository.findAll();
     }
 
+    public List<CarModel> listarCarro(){
+        List<CarModel> carros = carRepository.findAll();
+        System.out.println("Carros encontrados: " + carros);
+        return carros;
+    }
 
 }
+
+
+

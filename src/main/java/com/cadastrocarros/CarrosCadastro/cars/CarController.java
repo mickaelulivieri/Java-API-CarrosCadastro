@@ -19,4 +19,13 @@ public class CarController {
         return carService.listarCarros();
     }
 
+    @GetMapping("/listarr")
+    public List<CarModel> listarCarro(){
+        return carService.listarCarro();  // Chama o serviço para obter os carros
+    }
+
+    @GetMapping("/boasVindas")
+    public String boasVindas(){
+        return "boas vindas";
+    }
 }
