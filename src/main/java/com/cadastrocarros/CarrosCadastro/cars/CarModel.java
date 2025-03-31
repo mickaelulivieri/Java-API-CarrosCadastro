@@ -4,7 +4,6 @@ import com.cadastrocarros.CarrosCadastro.cliente.ClienteModel;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Data
 @RequiredArgsConstructor

@@ -29,5 +29,4 @@ public class ClienteModel {
     @OneToMany(mappedBy = "cliente")
     private List<CarModel> carList;
 
-
 }
