@@ -1,15 +1,22 @@
 package com.cadastrocarros.CarrosCadastro.cars;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/carros")
 public class CarController {
 
-    @GetMapping("/boasVindas")
-    public String boasVindas(){
-        return "Primeira rota concluida";
+    private CarService carService;
+
+    public CarController(CarService carService) {
+        this.carService = carService;
     }
+
+    @GetMapping("/listar")
+    public List<CarModel> listarCarros(){
+        return carService.listarCarros();
+    }
+
 }
