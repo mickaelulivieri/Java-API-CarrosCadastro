@@ -1,5 +1,7 @@
 package com.cadastrocarros.CarrosCadastro.cars;
 
+import com.cadastrocarros.CarrosCadastro.cliente.ClienteModel;
+
 public class CarModel {
 
     String marca;
