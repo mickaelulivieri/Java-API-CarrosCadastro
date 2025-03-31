@@ -1,0 +1,13 @@
+package com.cadastrocarros.CarrosCadastro;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CarrosCadastroApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CarrosCadastroApplication.class, args);
+	}
+
+}
