@@ -8,23 +8,16 @@ import java.util.List;
 @Service
 public class CarService {
 
-
     private CarRepository carRepository;
 
     public CarService(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
 
-
     public List<CarModel> listarCarros(){
         return carRepository.findAll();
     }
 
-    public List<CarModel> listarCarro(){
-        List<CarModel> carros = carRepository.findAll();
-        System.out.println("Carros encontrados: " + carros);
-        return carros;
-    }
 
 }
 
