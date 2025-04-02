@@ -1,6 +1,7 @@
 package com.cadastrocarros.CarrosCadastro.cars;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,4 +29,8 @@ public class CarService {
         return carro.orElse(null);
     }
 
+    //criar um carro
+    public CarModel criarCarro(CarModel carro){
+        return carRepository.save(carro);
+    }
 }

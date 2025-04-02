@@ -25,4 +25,11 @@ public class CarController {
     public CarModel listarCarroPorId(@PathVariable Long id){
         return carService.listarPorId(id);
     }
+
+    // criar um carro
+    @PostMapping ("/criar")
+    public CarModel criarCarroo(@RequestBody CarModel carro){
+        return carService.criarCarro(carro);
+    }
+
 }
