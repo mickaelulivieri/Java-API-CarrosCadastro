@@ -1,6 +1,7 @@
 package com.cadastrocarros.CarrosCadastro.cars;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -37,5 +38,13 @@ public class CarService {
     //deletar carro por id
     public void deletarCarro(Long id){
          carRepository.deleteById(id);
+    }
+
+    public CarModel atualizarCarro(Long id, CarModel carroAtualizado){
+        if (carRepository.existsById(id)){
+            carroAtualizado.setId(id);
+            return carRepository.save(carroAtualizado);
+        }
+        return null;
     }
 }

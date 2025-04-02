@@ -37,4 +37,10 @@ public class CarController {
     public void deletarCarro(@PathVariable Long id){
         carService.deletarCarro(id);
     }
+
+    @PatchMapping("/alterar/{id}")
+    public CarModel alterarCarroPorId(@PathVariable Long id, @RequestBody CarModel carro){
+        return carService.atualizarCarro(id, carro);
+    }
+
 }
