@@ -14,13 +14,15 @@ public class CarController {
         this.carService = carService;
     }
 
+    //  Listar todos os carros
     @GetMapping("/listar")
     public List<CarModel> listarCarros(){
         return carService.listarCarros();
     }
 
-    @GetMapping("/boasVindas")
-    public String boasVindas(){
-        return "boas vindas";
+    // listar todos os carros por ID
+    @GetMapping("/listar/{id}")
+    public CarModel listarCarroPorId(@PathVariable Long id){
+        return carService.listarPorId(id);
     }
 }
