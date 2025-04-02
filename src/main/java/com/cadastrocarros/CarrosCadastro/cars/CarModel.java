@@ -16,32 +16,43 @@ public class CarModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "marca")
-    String marca;
+    private String marca;
 
     @Column(name = "modelo")
-    String modelo;
+    private String modelo;
 
     @Column(name = "img_carro")
-    String img;
+    private String img;
 
     @Column(name = "preco")
-    Double price;
+    private Double price;
 
     @Column(name = "chassi", unique = true)
-    String chassi;
+    private String chassi;
 
 
     @Column(name = "placa", unique = true)
-    String placa;
+    private String placa;
+
+    @Column(name = "cor")
+    private String cor;
 
     @ManyToOne
     @JoinColumn(name = "fk_cliente_id")
     @JsonIgnore
     private ClienteModel cliente;
 
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
 
     public Long getId() {
         return id;
