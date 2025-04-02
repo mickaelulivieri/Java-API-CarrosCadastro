@@ -33,4 +33,9 @@ public class CarService {
     public CarModel criarCarro(CarModel carro){
         return carRepository.save(carro);
     }
+
+    //deletar carro por id
+    public void deletarCarro(Long id){
+         carRepository.deleteById(id);
+    }
 }

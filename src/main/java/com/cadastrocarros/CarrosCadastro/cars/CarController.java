@@ -32,4 +32,9 @@ public class CarController {
         return carService.criarCarro(carro);
     }
 
+    // deletar um carro
+    @DeleteMapping("/deletar/{id}")
+    public void deletarCarro(@PathVariable Long id){
+        carService.deletarCarro(id);
+    }
 }
