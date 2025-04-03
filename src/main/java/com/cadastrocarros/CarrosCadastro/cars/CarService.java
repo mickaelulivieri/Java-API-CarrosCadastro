@@ -12,9 +12,11 @@ public class CarService {
 
     // injetando a dependencia
     private CarRepository carRepository;
+    private CarMapper carMapper;
 
-    public CarService(CarRepository carRepository) {
+    public CarService(CarRepository carRepository, CarMapper carMapper) {
         this.carRepository = carRepository;
+        this.carMapper = carMapper;
     }
 
     //metodos
@@ -31,8 +33,10 @@ public class CarService {
     }
 
     //criar um carro
-    public CarModel criarCarro(CarModel carro){
-        return carRepository.save(carro);
+    public CarDTO criarCarro(CarDTO carroDTO){
+        CarModel car = new CarMapper().map(carroDTO);
+        car = carRepository.save(car);
+        return carMapper.map(car);
     }
 
     //deletar carro por id

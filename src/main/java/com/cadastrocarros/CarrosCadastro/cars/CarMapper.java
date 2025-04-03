@@ -1,5 +1,8 @@
 package com.cadastrocarros.CarrosCadastro.cars;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CarMapper {
 
     //mapeando o DTO

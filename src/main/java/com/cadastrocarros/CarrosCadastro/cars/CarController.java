@@ -28,8 +28,8 @@ public class CarController {
 
     // criar um carro
     @PostMapping ("/criar")
-    public CarModel criarCarroo(@RequestBody CarModel carro){
-        return carService.criarCarro(carro);
+    public CarDTO criarCarroo(@RequestBody CarDTO carroDto){
+        return carService.criarCarro(carroDto);
     }
 
     // deletar um carro
