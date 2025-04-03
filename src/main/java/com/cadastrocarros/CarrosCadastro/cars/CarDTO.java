@@ -1,6 +1,11 @@
 package com.cadastrocarros.CarrosCadastro.cars;
 import com.cadastrocarros.CarrosCadastro.cliente.ClienteModel;
+import lombok.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class CarDTO {
 
     private Long id;
@@ -11,5 +16,6 @@ public class CarDTO {
     private String chassi;
     private String cor;
     private String placa;
+    private ClienteModel cliente;
 
 }
