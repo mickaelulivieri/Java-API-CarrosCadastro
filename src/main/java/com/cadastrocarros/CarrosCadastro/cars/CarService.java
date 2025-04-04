@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 public class CarService {
 
     // injetando a dependencia
-    private CarRepository carRepository;
-    private CarMapper carMapper;
+    private final CarRepository carRepository;
+    private final CarMapper carMapper;
 
     public CarService(CarRepository carRepository, CarMapper carMapper) {
         this.carRepository = carRepository;

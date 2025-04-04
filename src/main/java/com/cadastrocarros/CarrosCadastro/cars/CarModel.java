@@ -3,15 +3,13 @@ package com.cadastrocarros.CarrosCadastro.cars;
 import com.cadastrocarros.CarrosCadastro.cliente.ClienteModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_carros")
+@ToString(exclude = "fk_cliente_id")
 public class CarModel {
 
     @Id

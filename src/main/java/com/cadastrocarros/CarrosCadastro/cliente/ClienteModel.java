@@ -3,10 +3,7 @@ package com.cadastrocarros.CarrosCadastro.cliente;
 import com.cadastrocarros.CarrosCadastro.cars.CarModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_cliente")
+@ToString(exclude = "cliente")
 public class ClienteModel {
 
     @Id
