@@ -1,5 +1,8 @@
 package com.cadastrocarros.CarrosCadastro.cars;
 
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,33 +19,66 @@ public class CarController {
 
     //  Listar todos os carros
     @GetMapping("/listar")
-    public List<CarDTO> listarCarros(){
-        return carService.listarCarros();
+    public ResponseEntity<List<CarDTO>> listarCarros(){
+        List<CarDTO> carro = carService.listarCarros();
+        return ResponseEntity.ok(carro);
+
     }
 
     // listar todos os carros por ID
     @GetMapping("/listar/{id}")
-    public CarDTO listarCarroPorId(@PathVariable Long id){
-        return carService.listarPorId(id);
+    public ResponseEntity<?> listarCarroPorId(@PathVariable Long id){
+        CarDTO carro = carService.listarPorId(id);
+
+        if (carro != null){
+            return ResponseEntity.ok(carro);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Carro com o ID: " + id + " nao encontrado");
+        }
     }
 
     // criar um carro
-    @PostMapping ("/criar")
-    public CarDTO criarCarroo(@RequestBody CarDTO carroDto){
-        return carService.criarCarro(carroDto);
-
+    @PostMapping("/criar")
+    public ResponseEntity<String> criarCarro(@RequestBody CarDTO carroDto) {
+        CarDTO carNovo = carService.criarCarro(carroDto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Carro criado com sucesso: " + carNovo.getModelo());
     }
 
     // deletar um carro
     @DeleteMapping("/deletar/{id}")
-    public void deletarCarro(@PathVariable Long id){
-        carService.deletarCarro(id);
+    public ResponseEntity<String> deletarCarro(@PathVariable Long id) {
 
+        if (carService.listarPorId(id) != null) {
+            carService.deletarCarro(id);
+            return ResponseEntity.ok("Carro deletado com sucesso");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Carro nao encontrada");
+        }
     }
 
+    // alterar um carro
     @PatchMapping("/alterar/{id}")
-    public CarDTO alterarCarroPorId(@PathVariable Long id, @RequestBody CarDTO carro){
-        return carService.atualizarCarro(id, carro);
+    public ResponseEntity<?> alterarCarroPorId(@PathVariable Long id, @RequestBody CarDTO carro){
+        CarDTO car = carService.atualizarCarro(id, carro);
+
+        if (car != null){
+            return ResponseEntity.ok(carro);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("O carro com esse ID nao foi encontrado");
+        }
     }
+
+
+
+
+
+
+
 
 }
