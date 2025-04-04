@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CarMapper {
 
-    //mapeando o DTO
-
     // DTO → Model
     public CarModel map(CarDTO carDTO) {
         CarModel carModel = new CarModel();
@@ -25,7 +23,7 @@ public class CarMapper {
     // Model → DTO
     public CarDTO map(CarModel carModel) {
         CarDTO car = new CarDTO();
-        car.setId(carModel.getId()); // ← Esse aqui estava faltando!
+        car.setId(carModel.getId()); //
         car.setMarca(carModel.getMarca());
         car.setModelo(carModel.getModelo());
         car.setImg(carModel.getImg());

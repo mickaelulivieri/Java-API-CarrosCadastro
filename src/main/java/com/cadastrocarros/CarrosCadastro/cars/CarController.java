@@ -75,5 +75,17 @@ public class CarController {
         }
     }
 
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<List<CarDTO>> listarCarrosPorCliente(@PathVariable Long clienteId) {
+        List<CarDTO> carros = carService.buscarCarrosPorClienteId(clienteId);
+
+        if (carros.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(carros); //
+        }
+
+        return ResponseEntity.ok(carros);
+    }
+
 
 }

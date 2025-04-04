@@ -61,7 +61,12 @@ public class CarService {
         return null;
     }
 
-
+    public List<CarDTO> buscarCarrosPorClienteId(Long clienteId) {
+        List<CarModel> carros = carRepository.findByClienteId(clienteId);
+        return carros.stream()
+                .map(carMapper::map)
+                .collect(Collectors.toList());
+    }
 
 
 }
