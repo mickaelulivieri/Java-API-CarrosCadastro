@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CarService {
@@ -22,14 +23,17 @@ public class CarService {
     //metodos
 
     //listar carros
-    public List<CarModel> listarCarros() {
-        return carRepository.findAll();
+    public List<CarDTO> listarCarros() {
+        List<CarModel> car = carRepository.findAll();
+        return car.stream()
+                .map(carMapper::map)
+                .collect(Collectors.toList());
     }
 
     //listar carro por ID
-    public CarModel listarPorId(Long id){
-        Optional<CarModel> carro = carRepository.findById(id);
-        return carro.orElse(null);
+    public CarDTO listarPorId(Long id){
+        Optional<CarModel> car = carRepository.findById(id);
+        return car.map(carMapper::map).orElse(null);
     }
 
     //criar um carro
@@ -44,11 +48,20 @@ public class CarService {
          carRepository.deleteById(id);
     }
 
-    public CarModel atualizarCarro(Long id, CarModel carroAtualizado){
-        if (carRepository.existsById(id)){
+    public CarDTO atualizarCarro(Long id, CarDTO carDTO) {
+        Optional<CarModel> carroExistente = carRepository.findById(id);
+        if (carroExistente.isPresent()) {
+
+            CarModel carroAtualizado = carMapper.map(carDTO);
             carroAtualizado.setId(id);
-            return carRepository.save(carroAtualizado);
+            CarModel carroNovo = carRepository.save(carroAtualizado);
+            return carMapper.map(carroNovo);
         }
+
         return null;
     }
+
+
+
+
 }

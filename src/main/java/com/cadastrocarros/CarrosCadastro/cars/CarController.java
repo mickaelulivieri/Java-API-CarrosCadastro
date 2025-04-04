@@ -30,12 +30,14 @@ public class CarController {
     @PostMapping ("/criar")
     public CarDTO criarCarroo(@RequestBody CarDTO carroDto){
         return carService.criarCarro(carroDto);
+
     }
 
     // deletar um carro
     @DeleteMapping("/deletar/{id}")
     public void deletarCarro(@PathVariable Long id){
         carService.deletarCarro(id);
+
     }
 
     @PatchMapping("/alterar/{id}")
