@@ -1,6 +1,7 @@
 package com.cadastrocarros.CarrosCadastro.cliente;
 
 import com.cadastrocarros.CarrosCadastro.cars.CarModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class ClienteModel {
     @Column(name = "cpf")
     private String cpf;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<CarModel> carList;
 
