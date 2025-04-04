@@ -16,13 +16,13 @@ public class CarController {
 
     //  Listar todos os carros
     @GetMapping("/listar")
-    public List<CarModel> listarCarros(){
+    public List<CarDTO> listarCarros(){
         return carService.listarCarros();
     }
 
     // listar todos os carros por ID
     @GetMapping("/listar/{id}")
-    public CarModel listarCarroPorId(@PathVariable Long id){
+    public CarDTO listarCarroPorId(@PathVariable Long id){
         return carService.listarPorId(id);
     }
 
@@ -41,7 +41,7 @@ public class CarController {
     }
 
     @PatchMapping("/alterar/{id}")
-    public CarModel alterarCarroPorId(@PathVariable Long id, @RequestBody CarModel carro){
+    public CarDTO alterarCarroPorId(@PathVariable Long id, @RequestBody CarDTO carro){
         return carService.atualizarCarro(id, carro);
     }
 
