@@ -1,48 +1,55 @@
 package com.cadastrocarros.CarrosCadastro.cliente;
 
-import com.cadastrocarros.CarrosCadastro.cars.CarModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
 
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
 
     public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
 
-    // listar os clientes
+    // Listar todos os clientes
     @GetMapping("/listar")
-    public ResponseEntity<List<ClienteModel>> listarClientes(){
-        List<ClienteModel> cliente = clienteService.listarCliente();
-        return ResponseEntity.ok(cliente);
+    public ResponseEntity<List<ClienteDTO>> listarClientes() {
+        List<ClienteDTO> clientes = clienteService.listarClientes();
+        return ResponseEntity.ok(clientes);
     }
 
-    // listar por ID
+    // Listar cliente por ID
     @GetMapping("/listar/{id}")
-    public ResponseEntity<?> listarPorId(@PathVariable Long id){
-        Optional<ClienteModel> cliente = clienteService.listarPorId(id);
-        return ResponseEntity.ok(cliente);
+    public ResponseEntity<ClienteDTO> listarClientePorId(@PathVariable Long id) {
+        ClienteDTO clienteDTO = clienteService.listarPorId(id);
+        if (clienteDTO != null) {
+            return ResponseEntity.ok(clienteDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    // criar um cliente
+    // Criar um cliente
     @PostMapping("/criar")
-    public ClienteModel criarCliente(@RequestBody ClienteModel cliente){
-        return clienteService.criarCliente(cliente);
+    public ResponseEntity<ClienteDTO> criarCliente(@RequestBody ClienteDTO clienteDTO) {
+        ClienteDTO novoCliente = clienteService.criarCliente(clienteDTO);
+        return ResponseEntity.ok(novoCliente);
     }
 
-    // deletar um cliente
+    // Deletar cliente
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<String> deletarCarro(@PathVariable Long id){
+    public ResponseEntity<String> deletarCliente(@PathVariable Long id) {
         clienteService.deletarCliente(id);
-        return ResponseEntity.ok()
-                .body("Cliente deletado");
+        return ResponseEntity.ok("Cliente deletado com sucesso.");
     }
 
-    //
+    // Atualizar cliente
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<ClienteDTO> atualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
+        ClienteDTO atualizado = clienteService.alterarCliente(id, clienteDTO);
+        return ResponseEntity.ok(atualizado);
+    }
 }

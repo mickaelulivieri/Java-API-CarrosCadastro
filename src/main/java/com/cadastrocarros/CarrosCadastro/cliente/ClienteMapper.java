@@ -2,11 +2,12 @@ package com.cadastrocarros.CarrosCadastro.cliente;
 
 import com.cadastrocarros.CarrosCadastro.cars.CarDTO;
 import com.cadastrocarros.CarrosCadastro.cars.CarMapper;
-import com.cadastrocarros.CarrosCadastro.cars.CarModel;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class ClienteMapper {
 
     private final CarMapper carMapper;
@@ -33,6 +34,22 @@ public class ClienteMapper {
         return clienteDTO;
     }
 
+    public ClienteModel map(ClienteDTO clienteDTO) {
+        ClienteModel clienteModel = new ClienteModel();
 
+        clienteModel.setId(clienteDTO.getId());
+        clienteModel.setNome(clienteDTO.getNome());
+        clienteModel.setIdade(clienteDTO.getIdade());
+        clienteModel.setCpf(clienteDTO.getCpf());
 
+        if (clienteDTO.getCarList() != null) {
+            clienteModel.setCarList(
+                    clienteDTO.getCarList().stream()
+                            .map(carMapper::map)  // CarDTO → CarModel
+                            .collect(Collectors.toList())
+            );
+        }
+
+        return clienteModel;
+    }
 }

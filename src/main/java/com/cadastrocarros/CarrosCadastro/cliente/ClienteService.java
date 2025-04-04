@@ -1,51 +1,61 @@
 package com.cadastrocarros.CarrosCadastro.cliente;
-import com.cadastrocarros.CarrosCadastro.cars.CarModel;
+
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
 
-    private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
+    private final ClienteMapper clienteMapper;
 
-    public ClienteService(ClientRepository clientRepository) {
+    public ClienteService(ClientRepository clientRepository, ClienteMapper clienteMapper) {
         this.clientRepository = clientRepository;
+        this.clienteMapper = clienteMapper;
     }
 
-
-    // listar clientes
-    public List<ClienteModel> listarCliente(){
-        return clientRepository.findAll();
+    // Listar todos os clientes
+    public List<ClienteDTO> listarClientes() {
+        List<ClienteModel> clientes = clientRepository.findAll();
+        return clientes.stream()
+                .map(clienteMapper::map)
+                .collect(Collectors.toList());
     }
 
-    // listar cliente por ID
-    public Optional<ClienteModel> listarPorId(Long id){
-        return clientRepository.findById(id);
+    // Listar cliente por ID
+    public ClienteDTO listarPorId(Long id) {
+        return clientRepository.findById(id)
+                .map(clienteMapper::map)
+                .orElse(null); // já simplificado com orElse
     }
 
-    //criar um cliente
-    public ClienteModel criarCliente(ClienteModel cliente){
-        return clientRepository.save(cliente);
+    // Criar um cliente
+    public ClienteDTO criarCliente(ClienteDTO clienteDTO) {
+        ClienteModel clienteModel = clienteMapper.map(clienteDTO);
+        ClienteModel salvo = clientRepository.save(clienteModel);
+        return clienteMapper.map(salvo);
     }
 
-    // deletar um cliente
-    public void deletarCliente(Long id){
+    // Deletar cliente
+    public void deletarCliente(Long id) {
         clientRepository.deleteById(id);
     }
 
-    // alterar um cliente
-    public ClienteModel alterarCliente(Long id, ClienteModel novoCliente){
-        Optional<ClienteModel> cliente = clientRepository.findById(id);
-        if (cliente.isPresent()){
-            ClienteModel clienteExistente = cliente.get();
-            clienteExistente.setNome(novoCliente.getNome());
-            clienteExistente.setIdade(novoCliente.getIdade());
-            clienteExistente.setCpf(novoCliente.getCpf());
+    // Atualizar cliente
+    public ClienteDTO alterarCliente(Long id, ClienteDTO clienteDTO) {
+        Optional<ClienteModel> clienteOptional = clientRepository.findById(id);
+        if (clienteOptional.isPresent()) {
+            ClienteModel clienteExistente = clienteOptional.get();
+            clienteExistente.setNome(clienteDTO.getNome());
+            clienteExistente.setIdade(clienteDTO.getIdade());
+            clienteExistente.setCpf(clienteDTO.getCpf());
 
-            return clientRepository.save(clienteExistente);
-        } else{
-            throw new RuntimeException("Cliente nao encontrado");
+            ClienteModel atualizado = clientRepository.save(clienteExistente);
+            return clienteMapper.map(atualizado);
+        } else {
+            throw new RuntimeException("Cliente não encontrado");
         }
     }
 }
