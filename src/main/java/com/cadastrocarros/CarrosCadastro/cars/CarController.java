@@ -60,6 +60,7 @@ public class CarController {
         }
     }
 
+
     // alterar um carro
     @PatchMapping("/alterar/{id}")
     public ResponseEntity<?> alterarCarroPorId(@PathVariable Long id, @RequestBody CarDTO carro){
@@ -73,12 +74,6 @@ public class CarController {
                     .body("O carro com esse ID nao foi encontrado");
         }
     }
-
-
-
-
-
-
 
 
 }

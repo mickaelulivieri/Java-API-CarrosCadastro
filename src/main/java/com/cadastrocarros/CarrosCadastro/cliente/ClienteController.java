@@ -1,10 +1,8 @@
 package com.cadastrocarros.CarrosCadastro.cliente;
 
-import com.cadastrocarros.CarrosCadastro.cars.CarDTO;
-import org.apache.coyote.Response;
+import com.cadastrocarros.CarrosCadastro.cars.CarModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -37,4 +35,14 @@ public class ClienteController {
     public ClienteModel criarCliente(@RequestBody ClienteModel cliente){
         return clienteService.criarCliente(cliente);
     }
+
+    // deletar um cliente
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<String> deletarCarro(@PathVariable Long id){
+        clienteService.deletarCliente(id);
+        return ResponseEntity.ok()
+                .body("Cliente deletado");
+    }
+
+    //
 }

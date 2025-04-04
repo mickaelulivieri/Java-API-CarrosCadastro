@@ -1,10 +1,6 @@
 package com.cadastrocarros.CarrosCadastro.cliente;
-
 import com.cadastrocarros.CarrosCadastro.cars.CarModel;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +13,8 @@ public class ClienteService {
         this.clientRepository = clientRepository;
     }
 
-    // metodo listar clientes
+
+    // listar clientes
     public List<ClienteModel> listarCliente(){
         return clientRepository.findAll();
     }
@@ -27,8 +24,28 @@ public class ClienteService {
         return clientRepository.findById(id);
     }
 
-    //criar um carro
+    //criar um cliente
     public ClienteModel criarCliente(ClienteModel cliente){
         return clientRepository.save(cliente);
+    }
+
+    // deletar um cliente
+    public void deletarCliente(Long id){
+        clientRepository.deleteById(id);
+    }
+
+    // alterar um cliente
+    public ClienteModel alterarCliente(Long id, ClienteModel novoCliente){
+        Optional<ClienteModel> cliente = clientRepository.findById(id);
+        if (cliente.isPresent()){
+            ClienteModel clienteExistente = cliente.get();
+            clienteExistente.setNome(novoCliente.getNome());
+            clienteExistente.setIdade(novoCliente.getIdade());
+            clienteExistente.setCpf(novoCliente.getCpf());
+
+            return clientRepository.save(clienteExistente);
+        } else{
+            throw new RuntimeException("Cliente nao encontrado");
+        }
     }
 }
