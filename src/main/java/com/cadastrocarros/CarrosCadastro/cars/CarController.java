@@ -1,6 +1,5 @@
 package com.cadastrocarros.CarrosCadastro.cars;
 
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +21,6 @@ public class CarController {
     public ResponseEntity<List<CarDTO>> listarCarros(){
         List<CarDTO> carro = carService.listarCarros();
         return ResponseEntity.ok(carro);
-
     }
 
     // listar todos os carros por ID

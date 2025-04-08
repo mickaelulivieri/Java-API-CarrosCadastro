@@ -1,4 +1,5 @@
 package com.cadastrocarros.CarrosCadastro.cars;
+import com.cadastrocarros.CarrosCadastro.cliente.ClienteDTO;
 import com.cadastrocarros.CarrosCadastro.cliente.ClienteModel;
 import lombok.*;
 
@@ -14,7 +15,7 @@ public class CarDTO {
     private String chassi;
     private String cor;
     private String placa;
-    private ClienteModel cliente;
+    private ClienteDTO cliente;
 
     public Long getId() {
         return id;
@@ -24,12 +25,20 @@ public class CarDTO {
         this.id = id;
     }
 
-    public ClienteModel getCliente() {
+    public ClienteDTO getCliente() {
         return cliente;
     }
 
-    public void setCliente(ClienteModel cliente) {
+    public void setCliente(ClienteDTO cliente) {
         this.cliente = cliente;
+    }
+
+    public String getChassi() {
+        return chassi;
+    }
+
+    public void setChassi(String chassi) {
+        this.chassi = chassi;
     }
 
     public String getCor() {
@@ -46,14 +55,6 @@ public class CarDTO {
 
     public void setPlaca(String placa) {
         this.placa = placa;
-    }
-
-    public String getChassi() {
-        return chassi;
-    }
-
-    public void setChassi(String chassi) {
-        this.chassi = chassi;
     }
 
     public Double getPrice() {

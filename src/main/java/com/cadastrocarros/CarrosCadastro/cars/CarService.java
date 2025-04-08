@@ -1,8 +1,6 @@
 package com.cadastrocarros.CarrosCadastro.cars;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +36,7 @@ public class CarService {
 
     //criar um carro
     public CarDTO criarCarro(CarDTO carroDTO){
-        CarModel car = new CarMapper().map(carroDTO);
+        CarModel car = carMapper.map(carroDTO);
         car = carRepository.save(car);
         return carMapper.map(car);
     }

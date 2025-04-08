@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_carros")
-@ToString(exclude = "fk_cliente_id")
+@ToString(exclude = "cliente")
 public class CarModel {
 
     @Id

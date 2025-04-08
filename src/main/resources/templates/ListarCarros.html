@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabela de Carros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fc;
+            margin: 0;
+            padding: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 10px auto 20px;
+            border: 1px solid #007BFF;
+            padding: 10px 15px;
+            width: fit-content;
+            border-radius: 10px;
+            background-color: #e8f1fd;
+            font-family: 'Georgia', serif;
+            font-size: 18px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .carro-box {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border: 1px solid #cfe2ff;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+        }
+
+        .foto-carro {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #007BFF;
+            margin-right: 15px;
+            flex-shrink: 0;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .foto-carro img {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+            clip-path: circle(50% at 50% 50%);
+        }
+
+        .info-carro table {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+            font-size: 12px;
+        }
+
+        .info-carro th, .info-carro td {
+            text-align: left;
+            padding: 4px 6px;
+            vertical-align: middle;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .info-carro th {
+            background-color: #dceeff;
+            font-family: 'Tahoma', sans-serif;
+            width: 60px;
+        }
+
+        .info-carro td {
+            background-color: #f9f9f9;
+        }
+
+        .info-carro th:nth-child(1), .info-carro td:nth-child(1) { width: 20px; }
+        .info-carro th:nth-child(2), .info-carro td:nth-child(2) { width: 50px; }
+        .info-carro th:nth-child(3), .info-carro td:nth-child(3) { width: 70px; }
+        .info-carro th:nth-child(4), .info-carro td:nth-child(4) { width: 50px; }
+        .info-carro th:nth-child(5), .info-carro td:nth-child(5) { width: 120px; }
+    </style>
+</head>
+<body>
+
+<h1>Tabela de Carros</h1>
+
+<div class="container">
+    <div class="carro-box" th:each="carro : ${carros}">
+        <div class="foto-carro">
+            <img th:src="${carro.img}" alt="Imagem do carro">
+        </div>
+        <div class="info-carro">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <td th:text="${carro.id}">ID</td>
+                </tr>
+                <tr>
+                    <th>Marca</th>
+                    <td th:text="${carro.marca}">Marca</td>
+                </tr>
+                <tr>
+                    <th>Modelo</th>
+                    <td th:text="${carro.modelo}">Modelo</td>
+                </tr>
+                <tr>
+                    <th>Preço</th>
+                    <td th:text="${carro.price}">Preço</td>
+                </tr>
+                <tr>
+                    <th>Chassi</th>
+                    <td th:text="${carro.chassi}">Chassi</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -18,7 +18,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
   flyway:
-    enabled: true
+    enabled: false
     locations: classpath:db/migrations
     baseline-on-migrate: true
 
